@@ -1,0 +1,43 @@
+.quote-card {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  transition: transform 0.2s;
+  position: relative;
+  opacity: 0.8;
+  max-width: 100%;
+  width: max(40%, 20rem);
+}
+
+.quote-card:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.quote-card__title {
+  color: var(--yellow);
+  text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.quote-card__text {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.quote-card__link {
+  display: block;
+  text-decoration: none;
+  color: var(--lightblue);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.quote-card__link:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

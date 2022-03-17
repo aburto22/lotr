@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import CharacterCard from '../CharacterCard';
 import CharacterContext from '../../context/CharacterContext';
-import { getPage, getName, getRace } from '../../services/pagination';
+import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
 import { useSearchParams } from 'react-router-dom';
+import { ICharacter } from '../../types';
 import './style.css';
 
 interface IQueryObj {
@@ -35,9 +36,9 @@ const Characters = () => {
     setQuery({ ...queryObj});
   }, [page, setQuery, name, race]);
 
-  const charactersNamed = getName(characters, name);
-  const charactersRace = getRace(charactersNamed, race);
-  const charactersFiltered = getPage(charactersRace, page, limit);
+  const charactersNamed = getNameCharacter(characters, name);
+  const charactersRace = getRaceCharacter(charactersNamed, race);
+  const charactersFiltered = getPage<ICharacter>(charactersRace, page, limit);
 
   const handlePrevPage = () => {
     setPage((currentPage) => {
@@ -91,7 +92,7 @@ const Characters = () => {
           </select>
         </label>
       </section>
-      <section className="character-main__board">
+      <section className="characters-main__board">
         {charactersFiltered
           .map((c) => (
             <CharacterCard
@@ -103,9 +104,9 @@ const Characters = () => {
             />
         ))}
       </section>
-      <section className="character-main__pagination">
-        <button className="character-main__button" onClick={handlePrevPage}>Previous</button>
-        <button className="character-main__button" onClick={handleNextPage}>Next</button>
+      <section className="characters-main__pagination">
+        <button className="characters-main__button" onClick={handlePrevPage}>Previous</button>
+        <button className="characters-main__button" onClick={handleNextPage}>Next</button>
       </section>
     </main>
   );

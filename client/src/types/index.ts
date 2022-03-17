@@ -25,3 +25,11 @@ export interface IQuote {
   character: string;
   id: string;
 }
+
+export interface IQuoteName {
+  dialog: string;
+  movie: string;
+  character: string;
+  id: string;
+  characterName: string;
+}

@@ -1,39 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { fetchFromApi } from '../../services/api';
-import { ICharacter } from '../../types';
+import { ICharacter, IQuote, IQuoteName } from '../../types';
 import Header from '../Header';
 import Footer from '../Footer';
 import Home from '../Home';
 import Characters from '../Characters';
 import Character from '../Character';
+import Quotes from '../Quotes';
 import NotFound from '../NotFound';
 import CharacterContext from '../../context/CharacterContext';
+import QuoteContext from '../../context/QuoteContext';
+import { populateNamesQuotes } from '../../services/pagination';
 
 const Site = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [quotes, setQuotes] = useState<IQuoteName[]>([]);
 
   useEffect(() => {
-    const fetchCharacters = async (): Promise<void> => {
-      const characters = await fetchFromApi<ICharacter[]>('/characters');
-      setCharacters(characters);
+    const fetchInfo = async (): Promise<void> => {
+      const [characterData, quoteData] = await Promise.all([
+        fetchFromApi<ICharacter[]>('/characters'),
+        fetchFromApi<IQuote[]>('/quotes')
+      ]);
+      const quotePopulatedData = quoteData.map((q) => populateNamesQuotes(q, characterData));
+      setCharacters(characterData);
+      setQuotes(quotePopulatedData);
     }
-
-    fetchCharacters();
+    fetchInfo();
   }, []);
 
   return (
     <CharacterContext.Provider value={characters}>
-      <Header />
-      <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="characters/*">
-          <Route path=":id" element={<Character />} />
-          <Route index element={<Characters />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+      <QuoteContext.Provider value={quotes}>
+        <Header />
+        <Routes>
+          <Route path="home" element={<Home />} />
+          <Route path="characters/*">
+            <Route path=":id" element={<Character />} />
+            <Route index element={<Characters />} />
+          </Route>
+          <Route path="quotes/*">
+            {/* <Route path=":id" element={<Quote />} /> */}
+            <Route index element={<Quotes />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </QuoteContext.Provider>
     </CharacterContext.Provider>
   )
 };

@@ -1,4 +1,4 @@
-.characters-main {
+.quotes-main {
   width: 70rem;
   max-width: 100%;
   color: white;
@@ -6,7 +6,7 @@
   padding: 2rem 1rem;
 }
 
-.characters-main__title {
+.quotes-main__title {
   color: var(--yellow);
   text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
   text-align: center;
@@ -15,23 +15,24 @@
   font-size: 3rem;
 }
 
-.characters-main__text {
+.quotes-main__text {
   margin-bottom: 0.6rem;
   color: white;
 }
 
-.characters-main__board {
+.quotes-main__board {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
 }
 
-.characters-main__pagination {
+.quotes-main__pagination {
   display: flex;
   justify-content: center;
 }
 
-.characters-main__button {
+.quotes-main__button {
   padding: 0.8rem 1rem;
   margin: 0.5rem 1rem;
   border: none;
@@ -45,25 +46,25 @@
   transition: transform 0.1s;
 }
 
-.characters-main__button:hover {
+.quotes-main__button:hover {
   transform: scale(1.1);
   background-color: var(--lightblue);
   color: var(--black);
 }
 
-.characters-main__form {
+.quotes-main__form {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
 }
 
-.characters-main__label {
+.quotes-main__label {
   margin: 0.5rem;
   display: flex;
   align-items: center;
 }
 
-.characters-main__input {
+.quotes-main__input {
   margin-left: 0.5rem;
   display: block;
   padding: 0.2rem 0.4rem;
