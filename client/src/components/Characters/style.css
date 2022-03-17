@@ -2,7 +2,7 @@
   width: 70rem;
   max-width: 100%;
   color: white;
-  margin: auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
 }
 
@@ -11,9 +11,17 @@
   text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
   text-align: center;
   margin-bottom: 0.5rem;
+  font-family: 'Morris Roman', sans-serif;
+  font-size: 3rem;
 }
 
 .characters-main__text {
   margin-bottom: 0.6rem;
   color: white;
+}
+
+.character-main__board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

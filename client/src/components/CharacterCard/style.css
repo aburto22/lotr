@@ -1,0 +1,39 @@
+.character-card {
+  padding: 1rem;
+  margin: 0.5rem;
+  transition: transform 0.2s;
+  position: relative;
+  opacity: 0.8;
+}
+
+.character-card:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.character-card__title {
+  color: var(--yellow);
+  text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
+  font-size: 1.1rem;
+}
+
+.character-card__text {
+  font-size: 0.8rem;
+}
+
+.character-card__link {
+  display: block;
+  text-decoration: none;
+  color: var(--lightblue);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.character-card__link:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
