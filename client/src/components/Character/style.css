@@ -1,5 +1,5 @@
 .character-main {
-  width: 40rem;
+  width: max-content;
   max-width: 100%;
   color: white;
   margin: 0 auto;
@@ -18,4 +18,18 @@
 .character-main__text {
   margin-bottom: 0.6rem;
   color: white;
+}
+
+.character-main__link {
+  margin-top: 1rem;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: var(--lightblue);
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+
+.character-main__link:hover {
+  transform: scale(1.2);
 }

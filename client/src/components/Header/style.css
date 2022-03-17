@@ -28,6 +28,7 @@
   text-decoration: none;
   transition: transform 0.3s;
   color: var(--lightblue);
+  font-size: 1.1rem;
 }
 
 .nav__link:hover {
