@@ -21,8 +21,9 @@ const Character = () => {
       const data = await fetchFromApi<ImageFetch>(`/characters/${id}/image`);
       setImage(data.src);
     };
-
-    fetchImage();
+    if (character?.wikiUrl) {
+      fetchImage();
+    }
   }, [id]);
 
   const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;

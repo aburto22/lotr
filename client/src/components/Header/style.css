@@ -10,7 +10,7 @@
   margin-bottom: 0.5rem;
   color: var(--yellow);
   text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
-  font-size: 2.3rem;
+  font-size: 1.5rem;
   font-family: 'Morris Roman', sans-serif;
   display: block;
 }
@@ -28,11 +28,21 @@
   text-decoration: none;
   transition: transform 0.3s;
   color: var(--lightblue);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   margin: 0 0.5rem;
 }
 
 .nav__link:hover {
   transform: scale(1.4);
   color: var(--lightblue);
+}
+
+@media screen and (min-width: 30rem) {
+  .header__title-link {
+    font-size: 2.3rem;
+  }
+
+  .nav__link {
+    font-size: 1.1rem;
+  }
 }

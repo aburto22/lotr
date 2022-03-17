@@ -23,23 +23,37 @@
 .characters-main__board {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .characters-main__form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
+  width: max-content;
 }
 
 .characters-main__label {
   margin: 0.5rem;
   display: flex;
   align-items: center;
+  width: max-content;
 }
 
 .characters-main__input {
   margin-left: 0.5rem;
   display: block;
   padding: 0.2rem 0.4rem;
+}
+
+@media screen and (min-width: 30rem) {
+  .characters-main__board {
+    justify-content: center;
+  }
+
+  .characters-main__form {
+    flex-direction: row;
+  }
 }

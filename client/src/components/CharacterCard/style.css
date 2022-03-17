@@ -4,7 +4,7 @@
   transition: transform 0.2s;
   position: relative;
   opacity: 0.8;
-  width: 12rem;
+  width: 9rem;
   overflow-wrap: break-word;
 }
 
@@ -40,4 +40,10 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+@media screen and (min-width: 30rem) {
+  .character-card {
+    width: 12rem;
+  }
 }
