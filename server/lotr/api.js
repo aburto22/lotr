@@ -15,6 +15,21 @@ const getAllCharacters = async () => {
     .map((character) => ({ ...character, id: character._id }));
 };
 
+const getAllQuotes = async () => {
+  const pages = [1, 2, 3];
+  const pagesPromises = pages.map((page) => axios({
+    method: 'get',
+    url: `https://the-one-api.dev/v2/quote?page=${page}`,
+    headers: {
+      Authorization: `Bearer ${process.env.LOTR_KEY}`,
+    },
+  }));
+
+  const responses = await Promise.all(pagesPromises);
+
+  return responses.map((res) => res.data.docs).flat();
+};
+
 const getImageFromUrl = async (url) => {
   const response = await axios.get(url);
   const dom = new JSDOM(response.data);
@@ -47,4 +62,5 @@ const getImage = async (id) => {
 module.exports = {
   getAllCharacters,
   getImage,
+  getAllQuotes,
 };
