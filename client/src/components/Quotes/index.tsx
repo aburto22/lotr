@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import QuoteCard from '../QuoteCard';
 import CharacterContext from '../../context/CharacterContext';
 import QuoteContext from '../../context/QuoteContext';
+import Pagination from '../Pagination';
 import { getPage, getNameQuotes, populateNamesQuotes } from '../../services/pagination';
 import { useSearchParams } from 'react-router-dom';
 import './style.css';
@@ -38,24 +39,6 @@ const Characters = () => {
   const quotesNamed = getNameQuotes(quotesPopulated, name);
   const quotesFiltered = getPage(quotesNamed, page, limit);
 
-  const handlePrevPage = () => {
-    setPage((currentPage) => {
-      if (currentPage <= 1) {
-        return currentPage;
-      }
-      return currentPage - 1;
-    });
-  };
-
-  const handleNextPage = () => {
-    setPage((currentPage) => {
-      if (currentPage > Math.floor(quotes.length / limit)) {
-        return currentPage;
-      }
-      return currentPage + 1;
-    });
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNameInput(e.target.value);
     if (nameTimeoutId.current) {
@@ -65,7 +48,9 @@ const Characters = () => {
       setName(e.target.value);
       setPage(1);
     }, 500);
-  }
+  };
+
+  const maxPage = Math.ceil(quotesNamed.length / limit);
 
   return (
     <main className="quotes-main">
@@ -90,12 +75,7 @@ const Characters = () => {
           ))
         : <h2>No quotes found</h2>}
       </section>
-      {quotesNamed.length > limit && (
-        <section className="quotes-main__pagination">
-          <button className="quotes-main__button" onClick={handlePrevPage}>Previous</button>
-          <button className="quotes-main__button" onClick={handleNextPage}>Next</button>
-        </section>
-      )}
+      {quotesNamed.length > limit && <Pagination setPage={setPage} maxPage={maxPage} />}
     </main>
   );
 };

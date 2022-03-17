@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import CharacterCard from '../CharacterCard';
 import CharacterContext from '../../context/CharacterContext';
 import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
+import Pagination from '../Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { ICharacter } from '../../types';
 import './style.css';
@@ -40,23 +41,7 @@ const Characters = () => {
   const charactersRace = getRaceCharacter(charactersNamed, race);
   const charactersFiltered = getPage<ICharacter>(charactersRace, page, limit);
 
-  const handlePrevPage = () => {
-    setPage((currentPage) => {
-      if (currentPage <= 1) {
-        return currentPage;
-      }
-      return currentPage - 1;
-    });
-  };
-
-  const handleNextPage = () => {
-    setPage((currentPage) => {
-      if (currentPage > Math.floor(charactersRace.length / limit)) {
-        return currentPage;
-      }
-      return currentPage + 1;
-    });
-  };
+  const maxPage = Math.ceil(charactersRace.length/limit);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -104,12 +89,7 @@ const Characters = () => {
             />
         ))}
       </section>
-      {charactersRace.length > limit && (
-        <section className="characters-main__pagination">
-          <button className="characters-main__button" onClick={handlePrevPage}>Previous</button>
-          <button className="characters-main__button" onClick={handleNextPage}>Next</button>
-        </section>
-      )}
+      {charactersRace.length > limit && <Pagination setPage={setPage} maxPage={maxPage} />}
     </main>
   );
 };
