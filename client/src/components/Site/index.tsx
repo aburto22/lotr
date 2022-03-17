@@ -12,12 +12,18 @@ import NotFound from '../NotFound';
 import CharacterContext from '../../context/CharacterContext';
 import QuoteContext from '../../context/QuoteContext';
 import { populateNamesQuotes } from '../../services/pagination';
+import './style.css';
 
 const Site = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [quotes, setQuotes] = useState<IQuoteName[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    if (!loaded) {
+      setTimeout(() => setLoaded(true), 0);
+    }
+
     const fetchInfo = async (): Promise<void> => {
       const [characterData, quoteData] = await Promise.all([
         fetchFromApi<ICharacter[]>('/characters'),
@@ -27,26 +33,28 @@ const Site = () => {
       setCharacters(characterData);
       setQuotes(quotePopulatedData);
     }
+
     fetchInfo();
-  }, []);
+  }, [loaded]);
 
   return (
     <CharacterContext.Provider value={characters}>
       <QuoteContext.Provider value={quotes}>
-        <Header />
-        <Routes>
-          <Route path="home" element={<Home />} />
-          <Route path="characters/*">
-            <Route path=":id" element={<Character />} />
-            <Route index element={<Characters />} />
-          </Route>
-          <Route path="quotes/*">
-            {/* <Route path=":id" element={<Quote />} /> */}
-            <Route index element={<Quotes />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+        <div className={`app ${loaded ? "app--visible" : ""}`}>
+          <Header />
+          <Routes>
+            <Route path="home" element={<Home />} />
+            <Route path="characters/*">
+              <Route path=":id" element={<Character />} />
+              <Route index element={<Characters />} />
+            </Route>
+            <Route path="quotes/*">
+              <Route index element={<Quotes />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
       </QuoteContext.Provider>
     </CharacterContext.Provider>
   )

@@ -1,0 +1,11 @@
+.app {
+  opacity: 0;
+  transition: opacity 1s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app--visible {
+  opacity: 1;
+}

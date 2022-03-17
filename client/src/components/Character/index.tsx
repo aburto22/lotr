@@ -16,6 +16,8 @@ const Character = () => {
   const navigate = useNavigate();
   const id = params.id;
 
+  const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
+
   useEffect(() => {
     const fetchImage = async () => {
       const data = await fetchFromApi<ImageFetch>(`/characters/${id}/image`);
@@ -24,9 +26,8 @@ const Character = () => {
     if (character?.wikiUrl) {
       fetchImage();
     }
-  }, [id]);
+  }, [id, character]);
 
-  const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
 
   const handleClick = () => {
     navigate(-1);

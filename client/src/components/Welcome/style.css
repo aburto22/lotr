@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   background-color: black;
+  transition: opacity 0.5s;
 }
 
 .welcome__background {
@@ -15,7 +16,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: url('/public/imgs/welcome_bg.jpeg');
+  background: url('/public/imgs/general_bg.jpeg');
   background-position: center;
   background-size: cover;
   transition: opacity 0.5s;
@@ -33,9 +34,13 @@
 }
 
 .welcome--hovered .welcome__background {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .welcome__link:hover {
   transform: scale(1.20);
+}
+
+.welcome--clicked {
+  opacity: 0;
 }
