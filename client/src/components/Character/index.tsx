@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './style.css';
 import { useParams } from 'react-router-dom';
-import { ICharacter } from '../../types';
-import { fetchFromApi } from '../../services';
+import CharacterContext from '../../context/CharacterContext';
 
 const Character = () => {
-  const [character, setCharacter] = useState<ICharacter>();
+  const characters = useContext(CharacterContext);
   const params = useParams();
   const id = params.id;
 
-  useEffect(() => {
-    const fetchCharacter = async (): Promise<void> => {
-      const data = await fetchFromApi<ICharacter>(`/characters/${id}`)
-      setCharacter(data);
-    }
-
-    fetchCharacter();
-  }, [id]);
+  const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
 
   return (
     <main className="character-main">

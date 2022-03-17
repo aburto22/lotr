@@ -25,3 +25,45 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.character-main__pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.character-main__button {
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--lightblue);
+  color: var(--lightblue);
+  font-family: Anirom;
+  font-size: 0.7rem;
+  transition: transform 0.1s;
+}
+
+.character-main__button:hover {
+  transform: scale(1.1);
+  background-color: var(--lightblue);
+  color: var(--black);
+}
+
+.characters-main__form {
+  display: flex;
+  justify-content: center;
+}
+
+.characters-main__label {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.characters-main__input {
+  margin-left: 0.5rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+}

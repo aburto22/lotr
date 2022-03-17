@@ -4,6 +4,7 @@
   transition: transform 0.2s;
   position: relative;
   opacity: 0.8;
+  width: 12rem;
 }
 
 .character-card:hover {
@@ -15,10 +16,12 @@
   color: var(--yellow);
   text-shadow: 3px 0 black, -3px 0 black, 0 -3px black,  0 3px black;
   font-size: 1.1rem;
+  text-align: center;
 }
 
 .character-card__text {
   font-size: 0.8rem;
+  text-align: center;
 }
 
 .character-card__link {

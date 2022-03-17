@@ -11,7 +11,6 @@ const getAllCharacters = async () => {
   });
 
   return response.data.docs
-    .slice(0, 10)
     .map((character) => ({ ...character, id: character._id }));
 };
 
