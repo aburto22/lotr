@@ -1,13 +1,13 @@
 const express = require('express');
-const { getAllCharacters, getCharacter } = require('./api');
+const { getAllCharacters, getImage } = require('./api');
 require('dotenv').config();
 
 const router = express.Router();
 
-router.get('/characters/:id', async (req, res, next) => {
+router.get('/characters/:id/image', async (req, res, next) => {
   try {
-    const character = await getCharacter(req.params.id);
-    res.json(character);
+    const src = await getImage(req.params.id);
+    res.send({ src });
   } catch (err) {
     next(err);
   }
