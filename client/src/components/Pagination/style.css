@@ -9,15 +9,20 @@
   border: none;
   background-color: transparent;
   border-radius: 0.5rem;
-  cursor: pointer;
-  box-shadow: 0 2px 5px var(--lightblue);
-  color: var(--lightblue);
   font-family: Anirom;
   font-size: 0.7rem;
   transition: transform 0.1s;
+  box-shadow: 0 2px 5px var(--blue);
+  color: var(--blue);
 }
 
-.pagination__button:hover {
+.pagination__button--active{
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--lightblue);
+  color: var(--lightblue);
+}
+
+.pagination__button--active:hover {
   transform: scale(1.1);
   background-color: var(--lightblue);
   color: var(--black);

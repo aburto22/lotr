@@ -27,19 +27,21 @@ const Pagination = ({ setPage, maxPage, page }: PaginationProps) => {
   };
 
   const prevButtonDisabled = page <= 1;
+  const nextButtonDisabled = page >= maxPage;
 
   return (
     <section className="pagination">
       <button
-        className="pagination__button"
+        className={`pagination__button ${!prevButtonDisabled ? "pagination__button--active" : ""}`}
         onClick={handlePrevPage}
         disabled={prevButtonDisabled}
       >
         Previous
       </button>
       <button
-        className="pagination__button"
+        className={`pagination__button ${!nextButtonDisabled ? "pagination__button--active" : ""}`}
         onClick={handleNextPage}
+        disabled={nextButtonDisabled}
       >
         Next
       </button>
