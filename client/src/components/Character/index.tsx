@@ -3,6 +3,7 @@ import './style.css';
 import { useParams } from 'react-router-dom';
 import CharacterContext from '../../context/CharacterContext';
 import { fetchFromApi  } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 interface ImageFetch {
   src: string;
@@ -42,6 +43,7 @@ const Character = () => {
             <p className="character-main__info">Realm: {character.realm}</p>
             <p className="character-main__info">Hair: {character.hair}</p>
             <p className="character-main__info">Height: {character.height}</p>
+            <Link to={`/quotes?name=${character.name.toLowerCase()}`} className="character-main__link">See quotes</Link>
             <a href={character.wikiUrl} className="character-main__link">Visit wikipedia</a>
           </>
         ) 

@@ -63,6 +63,7 @@ const Characters = () => {
     }
     nameTimeoutId.current = setTimeout(() => {
       setName(e.target.value);
+      setPage(1);
     }, 500);
   }
 
@@ -82,7 +83,8 @@ const Characters = () => {
               key={q.id}
               dialog={q.dialog}
               id={q.id}
-              character={q.characterName}
+              characterName={q.characterName}
+              characterId={q.character}
             />
         ))}
       </section>
