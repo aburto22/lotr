@@ -1,6 +1,7 @@
 .footer {
   margin-top: auto;
   padding: 1rem;
+  background-color: var(--transparent-blue);
 }
 
 .footer__text {

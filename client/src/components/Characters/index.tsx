@@ -1,8 +1,11 @@
 import React from 'react';
+import './style.css';
 
 const Characters = () => {
   return (
-    <h1>I am the characters page</h1>
+    <main className="characters-main">
+      <h1 className="characters-main__title">Characters</h1>
+    </main>
   );
 };
 
