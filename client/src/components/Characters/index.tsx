@@ -89,7 +89,7 @@ const Characters = () => {
             />
         ))}
       </section>
-      {charactersRace.length > limit && <Pagination setPage={setPage} maxPage={maxPage} />}
+      {charactersRace.length > limit && <Pagination setPage={setPage} maxPage={maxPage} page={page} />}
     </main>
   );
 };

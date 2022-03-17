@@ -4,9 +4,10 @@ import './style.css';
 interface PaginationProps {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   maxPage: number;
+  page: number;
 }
 
-const Pagination = ({ setPage, maxPage}: PaginationProps) => {
+const Pagination = ({ setPage, maxPage, page }: PaginationProps) => {
   const handlePrevPage = () => {
     setPage((currentPage) => {
       if (currentPage <= 1) {
@@ -25,10 +26,23 @@ const Pagination = ({ setPage, maxPage}: PaginationProps) => {
     });
   };
 
+  const prevButtonDisabled = page <= 1;
+
   return (
     <section className="pagination">
-      <button className="pagination__button" onClick={handlePrevPage}>Previous</button>
-      <button className="pagination__button" onClick={handleNextPage}>Next</button>
+      <button
+        className="pagination__button"
+        onClick={handlePrevPage}
+        disabled={prevButtonDisabled}
+      >
+        Previous
+      </button>
+      <button
+        className="pagination__button"
+        onClick={handleNextPage}
+      >
+        Next
+      </button>
     </section>
   );
 }

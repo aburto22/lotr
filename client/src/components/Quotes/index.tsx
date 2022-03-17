@@ -28,12 +28,16 @@ const Characters = () => {
   const nameTimeoutId = useRef<any>(0);
 
   useEffect(() => {
+    if (query.get('page') === page.toString() && query.get('name') === name) {
+      return;
+    }
+
     const queryObj: IQueryObj = { page: page.toString() };
     if (name) {
       queryObj.name = name;
     }
     setQuery({ ...queryObj});
-  }, [page, setQuery, name]);
+  }, [page, setQuery, name, query]);
   
   const quotesPopulated = quotes.map((q) => populateNamesQuotes(q, characters));
   const quotesNamed = getNameQuotes(quotesPopulated, name);
@@ -75,7 +79,7 @@ const Characters = () => {
           ))
         : <h2>No quotes found</h2>}
       </section>
-      {quotesNamed.length > limit && <Pagination setPage={setPage} maxPage={maxPage} />}
+      {quotesNamed.length > limit && <Pagination setPage={setPage} maxPage={maxPage} page={page} />}
     </main>
   );
 };

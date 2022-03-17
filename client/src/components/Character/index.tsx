@@ -43,7 +43,7 @@ const Character = () => {
             {character.realm && <p className="character-main__info">Realm: {character.realm}</p>}
             {character.hair && <p className="character-main__info">Hair: {character.hair}</p>}
             {character.height && <p className="character-main__info">Height: {character.height}</p>}
-            <Link to={`/quotes?name=${character.name.toLowerCase()}`} className="character-main__link">See quotes</Link>
+            <Link to={`/quotes?page=1&name=${character.name.replace(/ /g, '+').toLowerCase()}`} className="character-main__link">See quotes</Link>
             <a href={character.wikiUrl} className="character-main__link">Visit wikipedia</a>
           </>
         ) 
