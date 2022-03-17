@@ -18,3 +18,10 @@ export interface ICharacter {
   wikiUrl: string,
   id: string
 }
+
+export interface IQuote {
+  dialog: string;
+  movie: string;
+  character: string;
+  id: string;
+}

@@ -27,7 +27,16 @@ const getAllQuotes = async () => {
 
   const responses = await Promise.all(pagesPromises);
 
-  return responses.map((res) => res.data.docs).flat();
+  const allQuotes = responses.map((res) => res.data.docs).flat();
+
+  const filteredQuotes = allQuotes.reduce((quotes, quote) => {
+    if (quotes.findIndex((q) => q.dialog === quote.dialog) < 0) {
+      return [...quotes, quote];
+    }
+    return quotes;
+  }, []);
+
+  return filteredQuotes;
 };
 
 const getImageFromUrl = async (url) => {
