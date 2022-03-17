@@ -33,3 +33,9 @@
 .character-main__link:hover {
   transform: scale(1.2);
 }
+
+.character-main__image {
+  display: block;
+  margin: 0.5rem auto;
+  max-width: 100%;
+}
