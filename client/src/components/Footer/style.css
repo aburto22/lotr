@@ -1,0 +1,10 @@
+.footer {
+  margin-top: auto;
+  padding: 1rem;
+}
+
+.footer__text {
+  color: var(--lightblue);
+  text-align: center;
+  font-size: 0.6rem;
+}

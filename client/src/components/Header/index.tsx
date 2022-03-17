@@ -5,7 +5,7 @@ import './style.css';
 const Header = () => {
   return (
     <header className="header">
-      <h1 className="header__title">LOTR Quotes</h1>
+      <h1 className="header__title">The Lord of the Rings</h1>
       <nav className="nav">
         <Link to="/characters" className="nav__link">Characters</Link>
       </nav>

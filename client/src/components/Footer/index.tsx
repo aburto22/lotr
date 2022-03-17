@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.css';
 
 const Footer = () => {
   return (
-    <h1>I am the footer</h1>
+    <footer className="footer">
+      <p className="footer__text">Created by Alejandro Aburto Salazar for &lt;/Salt&gt;</p>
+    </footer>
   );
 }
 
