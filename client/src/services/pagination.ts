@@ -18,6 +18,16 @@ export const getRace = (characters: ICharacter[], race: string) => {
   if (!race) {
     return characters;
   }
-  const raceRgx = new RegExp(race, 'i');
+
+  let raceRgx: RegExp;
+  if (race === 'elf') {
+    raceRgx = new RegExp('el', 'i');
+  } else if (race === 'dwarf') {
+    raceRgx = new RegExp('dwar', 'i');
+  } else if (race === 'human') {
+    raceRgx = new RegExp('(human|men)', 'i');
+  } else {
+    raceRgx = new RegExp(race, 'i');
+  }
   return characters.filter((c) => raceRgx.test(c.race));
 }

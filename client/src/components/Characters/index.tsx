@@ -35,6 +35,10 @@ const Characters = () => {
     setQuery({ ...queryObj});
   }, [page, setQuery, name, race]);
 
+  const charactersNamed = getName(characters, name);
+  const charactersRace = getRace(charactersNamed, race);
+  const charactersFiltered = getPage(charactersRace, page, limit);
+
   const handlePrevPage = () => {
     setPage((currentPage) => {
       if (currentPage <= 1) {
@@ -46,7 +50,7 @@ const Characters = () => {
 
   const handleNextPage = () => {
     setPage((currentPage) => {
-      if (currentPage >= Math.floor(characters.length / limit)) {
+      if (currentPage > Math.floor(charactersRace.length / limit)) {
         return currentPage;
       }
       return currentPage + 1;
@@ -55,15 +59,13 @@ const Characters = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    setPage(1);
   }
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRace(e.target.value);
+    setPage(1);
   }
-
-  const charactersNamed = getName(characters, name);
-  const charactersRace = getRace(charactersNamed, race);
-  const charactersFiltered = getPage(charactersRace, page, limit);
 
   return (
     <main className="characters-main">
@@ -78,7 +80,14 @@ const Characters = () => {
           <select value={race} onChange={handleSelectChange} className="characters-main__input">
             <option value="">All</option>
             <option value="human">Human</option>
-            <option value="elv">Elv</option>
+            <option value="elf">Elf</option>
+            <option value="hobbit">Hobbit</option>
+            <option value="half-elven">Half-elven</option>
+            <option value="dwarf">Dwarf</option>
+            <option value="orc">Goblin / Orc</option>
+            <option value="dragon">Dragon</option>
+            <option value="eagle">Eagle</option>
+            <option value="spider">Spider</option>
           </select>
         </label>
       </section>
