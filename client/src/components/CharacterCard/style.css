@@ -5,6 +5,7 @@
   position: relative;
   opacity: 0.8;
   width: 12rem;
+  overflow-wrap: break-word;
 }
 
 .character-card:hover {

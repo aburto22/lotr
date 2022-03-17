@@ -77,21 +77,25 @@ const Characters = () => {
         </label>
       </section>
       <section className="quotes-main__board">
-        {quotesFiltered
-          .map((q) => (
-            <QuoteCard
-              key={q.id}
-              dialog={q.dialog}
-              id={q.id}
-              characterName={q.characterName}
-              characterId={q.character}
-            />
-        ))}
+        {quotesFiltered.length > 0 
+          ? quotesFiltered
+            .map((q) => (
+              <QuoteCard
+                key={q.id}
+                dialog={q.dialog}
+                id={q.id}
+                characterName={q.characterName}
+                characterId={q.character}
+              />
+          ))
+        : <h2>No quotes found</h2>}
       </section>
-      <section className="quotes-main__pagination">
-        <button className="quotes-main__button" onClick={handlePrevPage}>Previous</button>
-        <button className="quotes-main__button" onClick={handleNextPage}>Next</button>
-      </section>
+      {quotesNamed.length > limit && (
+        <section className="quotes-main__pagination">
+          <button className="quotes-main__button" onClick={handlePrevPage}>Previous</button>
+          <button className="quotes-main__button" onClick={handleNextPage}>Next</button>
+        </section>
+      )}
     </main>
   );
 };

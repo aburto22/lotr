@@ -104,10 +104,12 @@ const Characters = () => {
             />
         ))}
       </section>
-      <section className="characters-main__pagination">
-        <button className="characters-main__button" onClick={handlePrevPage}>Previous</button>
-        <button className="characters-main__button" onClick={handleNextPage}>Next</button>
-      </section>
+      {charactersRace.length > limit && (
+        <section className="characters-main__pagination">
+          <button className="characters-main__button" onClick={handlePrevPage}>Previous</button>
+          <button className="characters-main__button" onClick={handleNextPage}>Next</button>
+        </section>
+      )}
     </main>
   );
 };

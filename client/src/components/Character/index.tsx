@@ -35,14 +35,14 @@ const Character = () => {
           <>
             <h2 className="character-main__title">{character.name}</h2>
             {image && <img src={image} className="character-main__image" alt={character.name} />}
-            <p className="character-main__info">Race: {character.race}</p>
-            <p className="character-main__info">Gender: {character.gender}</p>
-            <p className="character-main__info">Birth: {character.birth}</p>
-            <p className="character-main__info">Spouse: {character.spouse}</p>
-            <p className="character-main__info">Death: {character.death}</p>
-            <p className="character-main__info">Realm: {character.realm}</p>
-            <p className="character-main__info">Hair: {character.hair}</p>
-            <p className="character-main__info">Height: {character.height}</p>
+            {character.race && <p className="character-main__info">Race: {character.race}</p>}
+            {character.gender && <p className="character-main__info">Gender: {character.gender}</p>}
+            {character.birth && <p className="character-main__info">Birth: {character.birth}</p>}
+            {character.spouse && <p className="character-main__info">Spouse: {character.spouse}</p>}
+            {character.death && <p className="character-main__info">Death: {character.death}</p>}
+            {character.realm && <p className="character-main__info">Realm: {character.realm}</p>}
+            {character.hair && <p className="character-main__info">Hair: {character.hair}</p>}
+            {character.height && <p className="character-main__info">Height: {character.height}</p>}
             <Link to={`/quotes?name=${character.name.toLowerCase()}`} className="character-main__link">See quotes</Link>
             <a href={character.wikiUrl} className="character-main__link">Visit wikipedia</a>
           </>
