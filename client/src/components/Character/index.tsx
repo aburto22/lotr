@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './style.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import CharacterContext from '../../context/CharacterContext';
 import { fetchFromApi  } from '../../services/api';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ const Character = () => {
   const characters = useContext(CharacterContext);
   const params = useParams();
   const [image, setImage] = useState('');
+  const navigate = useNavigate();
   const id = params.id;
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const Character = () => {
   }, [id]);
 
   const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
+
+  const handleClick = () => {
+    navigate(-1);
+  }
 
   return (
     <main className="character-main">
@@ -43,6 +48,7 @@ const Character = () => {
             {character.height && character.height !== 'NaN' && <p className="character-main__info">Height: {character.height}</p>}
             <Link to={`/quotes?page=1&name=${character.name.replace(/ /g, '+').toLowerCase()}`} className="character-main__link">See quotes</Link>
             {character.wikiUrl && <a href={character.wikiUrl} className="character-main__link">Visit wikipedia</a>}
+            <button className="character-main__button" onClick={handleClick}>Go back...</button>
           </>
         ) 
         : 'loading'
