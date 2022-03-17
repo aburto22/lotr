@@ -4,6 +4,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Home from '../Home';
 import Characters from '../Characters';
+import Character from '../Character';
 import NotFound from '../NotFound';
 
 const Site = () => {
@@ -12,7 +13,10 @@ const Site = () => {
       <Header />
       <Routes>
         <Route path="home" element={<Home />} />
-        <Route path="characters" element={<Characters />} />
+        <Route path="characters/*">
+          <Route path=":id" element={<Character />} />
+          <Route index element={<Characters />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
