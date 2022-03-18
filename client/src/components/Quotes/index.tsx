@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import QuoteCard from '../QuoteCard';
 import QuoteContext from '../../context/QuoteContext';
 import Pagination from '../Pagination';
+import DelayedInput from '../DelayedInput';
 import { getPage, getNameQuotes, getDialogQuotes } from '../../services/pagination';
 import { scrollToTop } from '../../services/ui';
 import { useSearchParams } from 'react-router-dom';
@@ -24,11 +25,7 @@ const Characters = () => {
   });
   const [limit] = useState(20);
   const [name, setName] = useState<string>(query.get('name') || '');
-  const [nameInput, setNameInput] = useState<string>(query.get('name') || '');
   const [dialog, setDialog] = useState<string>(query.get('dialog') || '');
-  const [dialogInput, setDialogInput] = useState<string>(query.get('dialog') || '');
-  const nameTimeoutId = useRef<any>(0);
-  const quoteTimeId = useRef<any>(0);
   
   useEffect(() => {
     scrollToTop();
@@ -53,42 +50,14 @@ const Characters = () => {
   const quotesDialog = getDialogQuotes(quotesNamed, dialog);
   const quotesFiltered = getPage(quotesDialog, page, limit);
 
-  const handleNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNameInput(e.target.value);
-    if (nameTimeoutId.current) {
-      clearTimeout(nameTimeoutId.current)
-    }
-    nameTimeoutId.current = setTimeout(() => {
-      setName(e.target.value);
-      setPage(1);
-    }, 200);
-  };
-
-  const handleDialogInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDialogInput(e.target.value);
-    if (quoteTimeId.current) {
-      clearTimeout(quoteTimeId.current)
-    }
-    quoteTimeId.current = setTimeout(() => {
-      setDialog(e.target.value);
-      setPage(1);
-    }, 200);
-  };
-
   const maxPage = Math.ceil(quotesDialog.length / limit);
 
   return (
     <main className="quotes-main">
       <h1 className="quotes-main__title">Quotes</h1>
       <section className="quotes-main__form">
-        <label htmlFor="quote" className="quotes-main__label">
-          Quote:
-          <input type="text" value={dialogInput} onChange={handleDialogInputChange} className="quotes-main__input" />
-        </label>
-        <label htmlFor="name" className="quotes-main__label">
-          Character:
-          <input type="text" value={nameInput} onChange={handleNameInputChange} className="quotes-main__input" />
-        </label>
+        <DelayedInput labelText="Quote" initialState={dialog} setState={setDialog} setPage={setPage} />
+        <DelayedInput labelText="Character" initialState={name} setState={setName} setPage={setPage} />
       </section>
       <section className="quotes-main__board">
         {quotesFiltered.length > 0 

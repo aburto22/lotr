@@ -1,0 +1,12 @@
+.delayed-input__label {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.delayed-input__input {
+  margin-left: 0.5rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+}

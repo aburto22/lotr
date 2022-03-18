@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import CharacterCard from '../CharacterCard';
 import CharacterContext from '../../context/CharacterContext';
+import DelayedInput from '../DelayedInput';
 import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
 import Pagination from '../Pagination';
 import { scrollToTop } from '../../services/ui';
@@ -48,11 +49,6 @@ const Characters = () => {
 
   const maxPage = Math.ceil(charactersRace.length/limit);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    setPage(1);
-  }
-
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRace(e.target.value);
     setPage(1);
@@ -62,10 +58,7 @@ const Characters = () => {
     <main className="characters-main">
       <h1 className="characters-main__title">Characters</h1>
       <section className="characters-main__form">
-        <label htmlFor="name" className="characters-main__label">
-          Name:
-          <input type="text" value={name} onChange={handleInputChange} className="characters-main__input" />
-        </label>
+        <DelayedInput labelText="Name" initialState={name} setState={setName} setPage={setPage} />
         <label htmlFor="race" className="characters-main__label">
           Race:
           <select value={race} onChange={handleSelectChange} className="characters-main__input">
