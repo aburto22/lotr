@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import QuoteCard from '../QuoteCard';
 import QuoteContext from '../../context/QuoteContext';
 import Pagination from '../Pagination';
