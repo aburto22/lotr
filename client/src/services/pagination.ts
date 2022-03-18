@@ -40,6 +40,14 @@ export const getNameQuotes = (quotes: IQuoteName[], name: string): IQuoteName[] 
   return quotes.filter((q) => nameRgx.test(q.characterName));
 }
 
+export const getDialogQuotes = (quotes: IQuoteName[], dialog: string): IQuoteName[] => {
+  if (!dialog) {
+    return quotes;
+  }
+  const dialogRgx = new RegExp(dialog, 'i');
+  return quotes.filter((q) => dialogRgx.test(q.dialog));
+}
+
 export const populateNamesQuotes = (quote: IQuote, characters: ICharacter[]): IQuoteName => {
   const character = characters.find(c => c.id === quote.character);
   return {
