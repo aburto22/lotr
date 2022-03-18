@@ -56,7 +56,7 @@ const Characters = () => {
     <main className="quotes-main">
       <h1 className="quotes-main__title">Quotes</h1>
       <section className="quotes-main__form">
-        <DelayedInput labelText="Quote" initialState={dialog} setState={setDialog} setPage={setPage} />
+        <DelayedInput labelText="Dialog" initialState={dialog} setState={setDialog} setPage={setPage} />
         <DelayedInput labelText="Character" initialState={name} setState={setName} setPage={setPage} />
       </section>
       <section className="quotes-main__board">

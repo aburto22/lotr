@@ -1,7 +1,7 @@
 .header {
-  padding: 2rem 1rem 0;
+  padding: 3rem 1rem 0;
   background-color: var(--transparent-blue);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .header__title-link {
