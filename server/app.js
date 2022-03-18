@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/api/lotr', lotr);
 
 app.use((req, res) => {
-  res.sendFile('index.html');
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.use((err, req, res, next) => {
