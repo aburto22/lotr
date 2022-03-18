@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './style.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import CharacterContext from '../../context/CharacterContext';
-import { fetchFromApi  } from '../../services/api';
+import { fetchPostFromApi  } from '../../services/api';
 import { Link } from 'react-router-dom';
 
 interface ImageFetch {
@@ -19,12 +19,12 @@ const Character = () => {
   const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
 
   useEffect(() => {
-    const fetchImage = async () => {
-      const data = await fetchFromApi<ImageFetch>(`/characters/${id}/image`);
+    const fetchImage = async (wiki: string): Promise<void> => {
+      const data = await fetchPostFromApi<ImageFetch>(`/characters/${id}/image`, { wiki });
       setImage(data.src);
     };
-    if (character?.wikiUrl) {
-      fetchImage();
+    if (character && character.wikiUrl) {
+      fetchImage(character.wikiUrl);
     }
   }, [id, character]);
 

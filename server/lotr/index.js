@@ -1,15 +1,18 @@
 const express = require('express');
-const { getAllCharacters, getImage, getAllQuotes } = require('./api');
+const { getAllCharacters, getImageFromUrl, getAllQuotes } = require('./api');
 require('dotenv').config();
 
 const router = express.Router();
 
-router.get('/characters/:id/image', async (req, res, next) => {
+router.post('/characters/:id/image', async (req, res, next) => {
   try {
-    const src = await getImage(req.params.id);
-    res.send({ src });
+    if (!req.body.wiki) {
+      return res.send({ src: '' });
+    }
+    const src = await getImageFromUrl(req.body.wiki);
+    return res.send({ src });
   } catch (err) {
-    next(err);
+    return next(err);
   }
 });
 

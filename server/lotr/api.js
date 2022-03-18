@@ -54,22 +54,8 @@ const getImageFromUrl = async (url) => {
   return imageMatch[0];
 };
 
-const getImage = async (id) => {
-  const response = await axios({
-    method: 'get',
-    url: `https://the-one-api.dev/v2/character/${id}`,
-    headers: {
-      Authorization: `Bearer ${process.env.LOTR_KEY}`,
-    },
-  });
-
-  const character = response.data.docs[0];
-  const wiki = character.wikiUrl;
-  return getImageFromUrl(wiki);
-};
-
 module.exports = {
   getAllCharacters,
-  getImage,
+  getImageFromUrl,
   getAllQuotes,
 };

@@ -20,10 +20,10 @@ const Site = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!loaded) {
-      setTimeout(() => setLoaded(true), 0);
-    }
+    setTimeout(() => setLoaded(true), 0);
+  }, [])
 
+  useEffect(() => {
     const fetchInfo = async (): Promise<void> => {
       const [characterData, quoteData] = await Promise.all([
         fetchFromApi<ICharacter[]>('/characters'),
@@ -35,7 +35,7 @@ const Site = () => {
     }
 
     fetchInfo();
-  }, [loaded]);
+  }, []);
 
   return (
     <CharacterContext.Provider value={characters}>
