@@ -3,6 +3,7 @@ import QuoteCard from '../QuoteCard';
 import QuoteContext from '../../context/QuoteContext';
 import Pagination from '../Pagination';
 import { getPage, getNameQuotes, getDialogQuotes } from '../../services/pagination';
+import { scrollToTop } from '../../services/ui';
 import { useSearchParams } from 'react-router-dom';
 import './style.css';
 
@@ -28,6 +29,10 @@ const Characters = () => {
   const [dialogInput, setDialogInput] = useState<string>(query.get('dialog') || '');
   const nameTimeoutId = useRef<any>(0);
   const quoteTimeId = useRef<any>(0);
+  
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     if (query.get('page') === page.toString() && query.get('name') === name && query.get('dialog') === dialog) {

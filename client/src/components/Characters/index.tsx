@@ -3,6 +3,7 @@ import CharacterCard from '../CharacterCard';
 import CharacterContext from '../../context/CharacterContext';
 import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
 import Pagination from '../Pagination';
+import { scrollToTop } from '../../services/ui';
 import { useSearchParams } from 'react-router-dom';
 import { ICharacter } from '../../types';
 import './style.css';
@@ -25,6 +26,10 @@ const Characters = () => {
   const [limit] = useState(10);
   const [name, setName] = useState<string>(query.get('name') || '');
   const [race, setRace] = useState<string>(query.get('race') || '');
+  
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     const queryObj: IQueryObj = { page: page.toString() };

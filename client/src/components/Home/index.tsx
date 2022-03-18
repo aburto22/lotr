@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { scrollToTop } from '../../services/ui';
 import './style.css';
 
 const Home = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <main className="home-main">
       <h1 className="home-main__title">Welcome to The Lord of the Ring quote website</h1>

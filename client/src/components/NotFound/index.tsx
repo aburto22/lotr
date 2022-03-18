@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { scrollToTop } from '../../services/ui';
 import './style.css';
 
 const NotFound = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+  
   return (
     <main className="not-found-main">
       <h1 className="not-found-main__title">You shall not pass!</h1>

@@ -3,6 +3,7 @@ import './style.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import CharacterContext from '../../context/CharacterContext';
 import { fetchPostFromApi  } from '../../services/api';
+import { scrollToTop } from '../../services/ui';
 import { Link } from 'react-router-dom';
 
 interface ImageFetch {
@@ -19,6 +20,10 @@ const Character = () => {
   const character = characters.length > 0 ? characters.find((c) => c.id === id) : null;
 
   useEffect(() => {
+    scrollToTop();
+  }, []);
+
+  useEffect(() => {
     const fetchImage = async (wiki: string): Promise<void> => {
       const data = await fetchPostFromApi<ImageFetch>(`/characters/${id}/image`, { wiki });
       setImage(data.src);
@@ -31,7 +36,7 @@ const Character = () => {
 
   const handleClick = () => {
     navigate(-1);
-  }
+  };
 
   return (
     <main className="character-main">
