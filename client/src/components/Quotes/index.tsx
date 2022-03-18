@@ -9,7 +9,7 @@ import './style.css';
 interface IQueryObj {
   page: string;
   name?: string;
-  quote?: string;
+  dialog?: string;
 }
 
 const Characters = () => {
@@ -24,13 +24,13 @@ const Characters = () => {
   const [limit] = useState(20);
   const [name, setName] = useState<string>(query.get('name') || '');
   const [nameInput, setNameInput] = useState<string>(query.get('name') || '');
-  const [quote, setQuote] = useState<string>(query.get('quote') || '');
-  const [quoteInput, setQuoteInput] = useState<string>(query.get('quote') || '');
+  const [dialog, setDialog] = useState<string>(query.get('dialog') || '');
+  const [dialogInput, setDialogInput] = useState<string>(query.get('dialog') || '');
   const nameTimeoutId = useRef<any>(0);
   const quoteTimeId = useRef<any>(0);
 
   useEffect(() => {
-    if (query.get('page') === page.toString() && query.get('name') === name && query.get('quote') === quote) {
+    if (query.get('page') === page.toString() && query.get('name') === name && query.get('dialog') === dialog) {
       return;
     }
 
@@ -38,14 +38,14 @@ const Characters = () => {
     if (name) {
       queryObj.name = name;
     }
-    if (quote) {
-      queryObj.quote = quote;
+    if (dialog) {
+      queryObj.dialog = dialog;
     }
     setQuery({ ...queryObj});
-  }, [page, setQuery, name, query, quote]);
+  }, [page, setQuery, name, query, dialog]);
   
   const quotesNamed = getNameQuotes(quotes, name);
-  const quotesDialog = getDialogQuotes(quotesNamed, quote);
+  const quotesDialog = getDialogQuotes(quotesNamed, dialog);
   const quotesFiltered = getPage(quotesDialog, page, limit);
 
   const handleNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,13 +59,13 @@ const Characters = () => {
     }, 200);
   };
 
-  const handleQuoteInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuoteInput(e.target.value);
+  const handleDialogInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDialogInput(e.target.value);
     if (quoteTimeId.current) {
       clearTimeout(quoteTimeId.current)
     }
     quoteTimeId.current = setTimeout(() => {
-      setQuote(e.target.value);
+      setDialog(e.target.value);
       setPage(1);
     }, 200);
   };
@@ -78,7 +78,7 @@ const Characters = () => {
       <section className="quotes-main__form">
         <label htmlFor="quote" className="quotes-main__label">
           Quote:
-          <input type="text" value={quoteInput} onChange={handleQuoteInputChange} className="quotes-main__input" />
+          <input type="text" value={dialogInput} onChange={handleDialogInputChange} className="quotes-main__input" />
         </label>
         <label htmlFor="name" className="quotes-main__label">
           Character:

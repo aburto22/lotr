@@ -1,4 +1,5 @@
 import React from 'react';
+import { scrollToTop } from '../../services/ui';
 import './style.css';
 
 interface PaginationProps {
@@ -15,6 +16,7 @@ const Pagination = ({ setPage, maxPage, page }: PaginationProps) => {
       }
       return currentPage - 1;
     });
+    scrollToTop();
   };
 
   const handleNextPage = () => {
@@ -24,6 +26,7 @@ const Pagination = ({ setPage, maxPage, page }: PaginationProps) => {
       }
       return currentPage + 1;
     });
+    scrollToTop();
   };
 
   const prevButtonDisabled = page <= 1;
