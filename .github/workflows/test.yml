@@ -1,0 +1,30 @@
+name: test and linting
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node@14
+        uses: actions/setup-node@v2
+        with:
+          - node-version: '14.x'
+      - name: client set-up and testing
+        run: cd client
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: cd ..
+
+      - name: server set-up and testing
+        run: cd server
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: cd ..
