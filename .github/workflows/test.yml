@@ -7,14 +7,17 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  set-up:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node@14
         uses: actions/setup-node@v2
         with:
-          - node-version: '14.x'
+          node-version: '14.x'
+
+  client-set-up-and-testing:
+    steps:
       - name: client set-up and testing
         run: cd client
       - run: npm ci
@@ -22,6 +25,8 @@ jobs:
       - run: npm run lint
       - run: cd ..
 
+  server-set-up-and-testing:
+    steps:
       - name: server set-up and testing
         run: cd server
       - run: npm ci
