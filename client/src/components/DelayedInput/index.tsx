@@ -8,14 +8,16 @@ interface DelayedInputProps {
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const DelayedInput = ({ labelText, initialState, setState, setPage }: DelayedInputProps) => {
+function DelayedInput({
+  labelText, initialState, setState, setPage,
+}: DelayedInputProps) {
   const [inputValue, setInputValue] = useState(initialState);
   const inputTimeId = useRef<any>(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     if (inputTimeId.current) {
-      clearTimeout(inputTimeId.current)
+      clearTimeout(inputTimeId.current);
     }
     inputTimeId.current = setTimeout(() => {
       setState(e.target.value);
@@ -25,7 +27,8 @@ const DelayedInput = ({ labelText, initialState, setState, setPage }: DelayedInp
 
   return (
     <label htmlFor="text-input" className="delayed-input__label">
-      {labelText}:
+      {labelText}
+      :
       <input
         type="text"
         value={inputValue}

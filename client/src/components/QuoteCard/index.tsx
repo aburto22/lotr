@@ -4,12 +4,11 @@ import './style.css';
 
 interface QuoteCardProps {
   dialog: string;
-  id: string;
   characterName: string;
   characterId: string;
 }
 
-const QuoteCard = ({ id, dialog, characterName, characterId}: QuoteCardProps) => {
+function QuoteCard({ dialog, characterName, characterId }: QuoteCardProps) {
   return (
     <div className="quote-card">
       <h2 className="quote-card__title">{dialog}</h2>

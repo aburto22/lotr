@@ -22,6 +22,7 @@ module.exports = {
     "@typescript-eslint"
   ],
   rules: {
+    "import/prefer-default-export": 0, 
   },
   ignorePatterns: ["build/", "node_modules/", ".eslintrc.js"],
 }

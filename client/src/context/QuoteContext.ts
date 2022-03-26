@@ -1,4 +1,4 @@
 import React from 'react';
 import { IQuoteName } from '../types';
 
-export default React.createContext<IQuoteName[]>([])
+export default React.createContext<IQuoteName[]>([]);

@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const Welcome = () => {
-
+function Welcome() {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-  }
+  };
 
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -23,10 +22,10 @@ const Welcome = () => {
     }
     setIsClicked(true);
     setTimeout(() => { navigate('/home'); }, 1000);
-  }
+  };
 
   return (
-    <main className={`welcome ${isHovered ? "welcome--hovered" : ""} ${isClicked ? "welcome--clicked" : ""}`}>
+    <main className={`welcome ${isHovered ? 'welcome--hovered' : ''} ${isClicked ? 'welcome--clicked' : ''}`}>
       <div className="welcome__background" />
       <Link
         to="/home"

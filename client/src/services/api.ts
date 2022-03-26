@@ -1,4 +1,4 @@
-const host = process.env.NODE_ENV === 'development' ? 'http://localhost:5500': '';
+const host = process.env.NODE_ENV === 'development' ? 'http://localhost:5500' : '';
 
 export const fetchFromApi = async <T>(path: string): Promise<T> => {
   const response = await fetch(`${host}/api/lotr${path}`);
@@ -14,6 +14,4 @@ export const fetchPostFromApi = async <T>(path: string, data: any): Promise<T> =
     body: JSON.stringify(data),
   });
   return response.json();
-}
-
-
+};

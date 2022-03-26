@@ -1,4 +1,4 @@
 export const scrollToTop = () => window.scrollTo({
-  top: 0, 
-  behavior: 'auto'
+  top: 0,
+  behavior: 'auto',
 });

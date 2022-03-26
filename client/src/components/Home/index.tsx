@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { scrollToTop } from '../../services/ui';
 import './style.css';
 
-const Home = () => {
+function Home() {
   useEffect(() => {
     scrollToTop();
   }, []);

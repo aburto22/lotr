@@ -9,7 +9,9 @@ interface CharacterCardProps {
   race: string;
 }
 
-const CharacterCard = ({ name, id, gender, race }: CharacterCardProps) => {
+function CharacterCard({
+  name, id, gender, race,
+}: CharacterCardProps) {
   return (
     <div className="character-card">
       <h2 className="character-card__title">{name}</h2>

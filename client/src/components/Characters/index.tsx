@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import CharacterCard from '../CharacterCard';
 import CharacterContext from '../../context/CharacterContext';
 import DelayedInput from '../DelayedInput';
 import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
 import Pagination from '../Pagination';
 import { scrollToTop } from '../../services/ui';
-import { useSearchParams } from 'react-router-dom';
 import { ICharacter } from '../../types';
 import './style.css';
 
@@ -15,7 +15,7 @@ interface IQueryObj {
   race?: string;
 }
 
-const Characters = () => {
+function Characters() {
   const characters = useContext(CharacterContext);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
@@ -27,7 +27,7 @@ const Characters = () => {
   const [limit] = useState(10);
   const [name, setName] = useState<string>(query.get('name') || '');
   const [race, setRace] = useState<string>(query.get('race') || '');
-  
+
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -40,19 +40,19 @@ const Characters = () => {
     if (race) {
       queryObj.race = race;
     }
-    setQuery({ ...queryObj});
+    setQuery({ ...queryObj });
   }, [page, setQuery, name, race]);
 
   const charactersNamed = getNameCharacter(characters, name);
   const charactersRace = getRaceCharacter(charactersNamed, race);
   const charactersFiltered = getPage<ICharacter>(charactersRace, page, limit);
 
-  const maxPage = Math.ceil(charactersRace.length/limit);
+  const maxPage = Math.ceil(charactersRace.length / limit);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRace(e.target.value);
     setPage(1);
-  }
+  };
 
   return (
     <main className="characters-main">
@@ -85,11 +85,12 @@ const Characters = () => {
               id={c.id}
               race={c.race}
             />
-        ))}
+          ))}
       </section>
-      {charactersRace.length > limit && <Pagination setPage={setPage} maxPage={maxPage} page={page} />}
+      {charactersRace.length > limit
+        && <Pagination setPage={setPage} maxPage={maxPage} page={page} />}
     </main>
   );
-};
+}
 
 export default Characters;

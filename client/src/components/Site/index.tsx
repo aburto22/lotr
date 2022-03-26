@@ -14,25 +14,25 @@ import QuoteContext from '../../context/QuoteContext';
 import { populateNamesQuotes } from '../../services/pagination';
 import './style.css';
 
-const Site = () => {
+function Site() {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [quotes, setQuotes] = useState<IQuoteName[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 0);
-  }, [])
+  }, []);
 
   useEffect(() => {
     const fetchInfo = async (): Promise<void> => {
       const [characterData, quoteData] = await Promise.all([
         fetchFromApi<ICharacter[]>('/characters'),
-        fetchFromApi<IQuote[]>('/quotes')
+        fetchFromApi<IQuote[]>('/quotes'),
       ]);
       const quotePopulatedData = quoteData.map((q) => populateNamesQuotes(q, characterData));
       setCharacters(characterData);
       setQuotes(quotePopulatedData);
-    }
+    };
 
     fetchInfo();
   }, []);
@@ -40,7 +40,7 @@ const Site = () => {
   return (
     <CharacterContext.Provider value={characters}>
       <QuoteContext.Provider value={quotes}>
-        <div className={`app ${loaded ? "app--visible" : ""}`}>
+        <div className={`app ${loaded ? 'app--visible' : ''}`}>
           <Header />
           <Routes>
             <Route path="home" element={<Home />} />
@@ -57,7 +57,7 @@ const Site = () => {
         </div>
       </QuoteContext.Provider>
     </CharacterContext.Provider>
-  )
-};
+  );
+}
 
 export default Site;
