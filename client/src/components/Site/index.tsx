@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { fetchFromApi } from '../../services/api';
-import { ICharacter, IQuote, IQuoteName } from '../../types';
+import { ICharacter, IQuoteName } from '../../types';
 import Header from '../Header';
 import Footer from '../Footer';
 import Home from '../Home';
@@ -11,8 +11,12 @@ import Quotes from '../Quotes';
 import NotFound from '../NotFound';
 import CharacterContext from '../../context/CharacterContext';
 import QuoteContext from '../../context/QuoteContext';
-import { populateNamesQuotes } from '../../services/pagination';
 import './style.css';
+
+interface FetchReturn {
+  characters: ICharacter[]
+  quotes: IQuoteName[]
+}
 
 const Site = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
@@ -25,13 +29,9 @@ const Site = () => {
 
   useEffect(() => {
     const fetchInfo = async (): Promise<void> => {
-      const [characterData, quoteData] = await Promise.all([
-        fetchFromApi<ICharacter[]>('/characters'),
-        fetchFromApi<IQuote[]>('/quotes'),
-      ]);
-      const quotePopulatedData = quoteData.map((q) => populateNamesQuotes(q, characterData));
-      setCharacters(characterData);
-      setQuotes(quotePopulatedData);
+      const data = await fetchFromApi<FetchReturn>('/');
+      setCharacters(data.characters);
+      setQuotes(data.quotes);
     };
 
     fetchInfo();
