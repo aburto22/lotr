@@ -14,7 +14,7 @@ interface IQueryObj {
   dialog?: string;
 }
 
-const Characters = () => {
+const Quotes = () => {
   const quotes = useContext(QuoteContext);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
@@ -78,4 +78,4 @@ const Characters = () => {
   );
 };
 
-export default Characters;
+export default Quotes;

@@ -8,6 +8,7 @@ import Home from '../Home';
 import Characters from '../Characters';
 import Character from '../Character';
 import Quotes from '../Quotes';
+import Favourites from '../Favourites';
 import NotFound from '../NotFound';
 import CharacterContext from '../../context/CharacterContext';
 import QuoteContext from '../../context/QuoteContext';
@@ -48,9 +49,8 @@ const Site = () => {
               <Route path=":id" element={<Character />} />
               <Route index element={<Characters />} />
             </Route>
-            <Route path="quotes/*">
-              <Route index element={<Quotes />} />
-            </Route>
+            <Route path="quotes" element={<Quotes />} />
+            <Route path="favourites" element={<Favourites />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
