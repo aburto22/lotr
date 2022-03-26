@@ -9,7 +9,7 @@ interface ImageFetch {
   src: string;
 }
 
-function Character() {
+const Character = () => {
   const characters = useContext(CharacterContext);
   const params = useParams();
   const [image, setImage] = useState('');
@@ -105,6 +105,6 @@ function Character() {
         : 'loading'}
     </main>
   );
-}
+};
 
 export default Character;

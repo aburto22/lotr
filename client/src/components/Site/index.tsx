@@ -14,7 +14,7 @@ import QuoteContext from '../../context/QuoteContext';
 import { populateNamesQuotes } from '../../services/pagination';
 import './style.css';
 
-function Site() {
+const Site = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [quotes, setQuotes] = useState<IQuoteName[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +58,6 @@ function Site() {
       </QuoteContext.Provider>
     </CharacterContext.Provider>
   );
-}
+};
 
 export default Site;

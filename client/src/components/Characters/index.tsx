@@ -15,7 +15,7 @@ interface IQueryObj {
   race?: string;
 }
 
-function Characters() {
+const Characters = () => {
   const characters = useContext(CharacterContext);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
@@ -91,6 +91,6 @@ function Characters() {
         && <Pagination setPage={setPage} maxPage={maxPage} page={page} />}
     </main>
   );
-}
+};
 
 export default Characters;

@@ -8,7 +8,7 @@ interface PaginationProps {
   page: number;
 }
 
-function Pagination({ setPage, maxPage, page }: PaginationProps) {
+const Pagination = ({ setPage, maxPage, page }: PaginationProps) => {
   const handlePrevPage = () => {
     setPage((currentPage) => {
       if (currentPage <= 1) {
@@ -52,6 +52,6 @@ function Pagination({ setPage, maxPage, page }: PaginationProps) {
       </button>
     </section>
   );
-}
+};
 
 export default Pagination;

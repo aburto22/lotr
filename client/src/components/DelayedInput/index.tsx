@@ -8,9 +8,9 @@ interface DelayedInputProps {
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function DelayedInput({
+const DelayedInput = ({
   labelText, initialState, setState, setPage,
-}: DelayedInputProps) {
+}: DelayedInputProps) => {
   const [inputValue, setInputValue] = useState(initialState);
   const inputTimeId = useRef<any>(0);
 
@@ -38,6 +38,6 @@ function DelayedInput({
       />
     </label>
   );
-}
+};
 
 export default DelayedInput;

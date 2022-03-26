@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { scrollToTop } from '../../services/ui';
 import './style.css';
 
-function Home() {
+const Home = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -16,6 +16,6 @@ function Home() {
       <p className="home-main__text">Safe journey!</p>
     </main>
   );
-}
+};
 
 export default Home;

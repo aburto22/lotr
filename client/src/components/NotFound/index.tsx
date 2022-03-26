@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { scrollToTop } from '../../services/ui';
 import './style.css';
 
-function NotFound() {
+const NotFound = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -13,6 +13,6 @@ function NotFound() {
       <p className="not-found-main__text">Unfortunately we couldn&apos;t find the site you were looking. Use the menu above to get back to our site</p>
     </main>
   );
-}
+};
 
 export default NotFound;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-function Welcome() {
+const Welcome = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
@@ -38,6 +38,6 @@ function Welcome() {
       </Link>
     </main>
   );
-}
+};
 
 export default Welcome;
