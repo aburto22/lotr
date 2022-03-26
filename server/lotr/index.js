@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllCharacters, getImageFromUrl, getAllQuotes } = require('./api');
+const { populateNamesQuotes } = require('./helpers');
 require('dotenv').config();
 
 const router = express.Router();
@@ -16,19 +17,12 @@ router.post('/characters/:id/image', async (req, res, next) => {
   }
 });
 
-router.get('/characters', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const characters = await getAllCharacters();
-    res.json(characters);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/quotes', async (req, res, next) => {
-  try {
-    const quotes = await getAllQuotes();
-    res.json(quotes);
+    const dataPromises = [getAllCharacters(), getAllQuotes()];
+    const [characters, quotes] = await Promise.all(dataPromises);
+    const namedQuotes = quotes.map((quote) => populateNamesQuotes(quote, characters));
+    res.json({ characters, quotes: namedQuotes });
   } catch (err) {
     next(err);
   }
