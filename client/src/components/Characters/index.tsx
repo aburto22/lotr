@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import CharacterCard from '../CharacterCard';
-import CharacterContext from '../../context/CharacterContext';
 import DelayedInput from '../DelayedInput';
 import { getPage, getNameCharacter, getRaceCharacter } from '../../services/pagination';
 import Pagination from '../Pagination';
@@ -16,7 +16,7 @@ interface IQueryObj {
 }
 
 const Characters = () => {
-  const characters = useContext(CharacterContext);
+  const characters = useAppSelector((state) => state.lotr.characters);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
     if (query.get('page')) {

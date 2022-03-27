@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IQuoteName } from '../../types';
+import { IQuote } from '../../types';
 import HearthIcon from '../HearthIcon';
 import './style.css';
 
 interface QuoteCardProps {
-  quote: IQuoteName
-  setFavourites: React.Dispatch<React.SetStateAction<IQuoteName[]>>;
+  quote: IQuote
+  setFavourites: React.Dispatch<React.SetStateAction<IQuote[]>>;
 }
 
 const QuoteCard = ({ quote, setFavourites }: QuoteCardProps) => {

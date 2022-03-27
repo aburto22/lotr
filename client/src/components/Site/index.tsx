@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { fetchFromApi } from '../../services/api';
-import { ICharacter, IQuoteName } from '../../types';
+import { IQuote } from '../../types';
 import { checkFavourite } from '../../services/favourites';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -11,20 +11,15 @@ import Character from '../Character';
 import Quotes from '../Quotes';
 import Favourites from '../Favourites';
 import NotFound from '../NotFound';
-import CharacterContext from '../../context/CharacterContext';
 import QuoteContext from '../../context/QuoteContext';
+import { useAppDispatch } from '../../hooks';
+import { fetchInfoThunk } from '../../slices';
 import './style.css';
 
-interface FetchReturn {
-  characters: ICharacter[]
-  quotes: IQuoteName[]
-}
-
 const Site = () => {
-  const [characters, setCharacters] = useState<ICharacter[]>([]);
-  const [quotes, setQuotes] = useState<IQuoteName[]>([]);
+  const [quotes, setQuotes] = useState<IQuote[]>([]);
   const [loaded, setLoaded] = useState(false);
-  const [favourites, setFavourites] = useState<IQuoteName[]>(() => {
+  const [favourites, setFavourites] = useState<IQuote[]>(() => {
     try {
       const saved = localStorage.getItem('lotrQuotes') || '[]';
       return JSON.parse(saved);
@@ -33,40 +28,40 @@ const Site = () => {
     }
   });
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     setTimeout(() => setLoaded(true), 0);
   }, []);
 
   useEffect(() => {
     const fetchInfo = async (): Promise<void> => {
-      const data = await fetchFromApi<FetchReturn>('/');
+      const data = await fetchFromApi('/');
       const quoteFavourites = data.quotes.map((q) => checkFavourite(q, favourites));
-      setCharacters(data.characters);
       setQuotes(quoteFavourites);
     };
 
     fetchInfo();
+    dispatch(fetchInfoThunk());
   }, []);
 
   return (
-    <CharacterContext.Provider value={characters}>
-      <QuoteContext.Provider value={quotes}>
-        <div className={`app ${loaded ? 'app--visible' : ''}`}>
-          <Header />
-          <Routes>
-            <Route path="home" element={<Home />} />
-            <Route path="characters/*">
-              <Route path=":id" element={<Character />} />
-              <Route index element={<Characters />} />
-            </Route>
-            <Route path="quotes" element={<Quotes setFavourites={setFavourites} />} />
-            <Route path="favourites" element={<Favourites favourites={favourites} setFavourites={setFavourites} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </div>
-      </QuoteContext.Provider>
-    </CharacterContext.Provider>
+    <QuoteContext.Provider value={quotes}>
+      <div className={`app ${loaded ? 'app--visible' : ''}`}>
+        <Header />
+        <Routes>
+          <Route path="home" element={<Home />} />
+          <Route path="characters/*">
+            <Route path=":id" element={<Character />} />
+            <Route index element={<Characters />} />
+          </Route>
+          <Route path="quotes" element={<Quotes setFavourites={setFavourites} />} />
+          <Route path="favourites" element={<Favourites favourites={favourites} setFavourites={setFavourites} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </QuoteContext.Provider>
   );
 };
 

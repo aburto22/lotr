@@ -1,23 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import quoteReducer from '../slices/quoteSlice';
-import favouriteReducer from '../slices/favouriteSlice';
-import characterReducer from '../slices/characterSlice';
+import lotrReducer from '../slices';
 import { readFromLocalStore, saveToLocalStorage } from '../services/favourites';
 
 const store = configureStore({
   reducer: {
-    quotes: quoteReducer,
-    favourites: favouriteReducer,
-    characters: characterReducer,
+    lotr: lotrReducer,
   },
   preloadedState: {
-    quotes: [],
-    characters: [],
-    favourites: readFromLocalStore(),
+    lotr: {
+      quotes: [],
+      characters: [],
+      favourites: readFromLocalStore(),
+    },
   },
 });
 
-store.subscribe(() => saveToLocalStorage(store.getState().favourites));
+store.subscribe(() => saveToLocalStorage(store.getState().lotr.favourites));
 
 export default store;
 

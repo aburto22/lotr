@@ -1,6 +1,6 @@
-import { IQuoteName } from '../types';
+import { IQuote } from '../types';
 
-export const checkFavourite = (quote: IQuoteName, favourites: IQuoteName[]): IQuoteName => {
+export const checkFavourite = (quote: IQuote, favourites: IQuote[]): IQuote => {
   if (favourites.findIndex((q) => q.id === quote.id) >= 0) {
     return { ...quote, isFavourite: true };
   }
@@ -16,6 +16,6 @@ export const readFromLocalStore = () => {
   }
 };
 
-export const saveToLocalStorage = (favourites: IQuoteName[]) => {
+export const saveToLocalStorage = (favourites: IQuote[]) => {
   localStorage.setItem('lotrQuotes', JSON.stringify(favourites));
 };

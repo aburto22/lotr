@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { scrollToTop } from '../../services/ui';
-import { IQuoteName } from '../../types';
+import { IQuote } from '../../types';
 import QuoteCard from '../QuoteCard';
 import './style.css';
 
 interface IFavouritesProps {
-  favourites: IQuoteName[];
-  setFavourites: React.Dispatch<React.SetStateAction<IQuoteName[]>>;
+  favourites: IQuote[];
+  setFavourites: React.Dispatch<React.SetStateAction<IQuote[]>>;
 }
 
 const Favourites = ({ favourites, setFavourites }: IFavouritesProps) => {

@@ -24,13 +24,6 @@ export interface IQuote {
   movie: string;
   character: string;
   id: string;
-}
-
-export interface IQuoteName {
-  dialog: string;
-  movie: string;
-  character: string;
-  id: string;
   characterName: string;
   isFavourite: boolean;
 }

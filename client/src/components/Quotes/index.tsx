@@ -6,7 +6,7 @@ import Pagination from '../Pagination';
 import DelayedInput from '../DelayedInput';
 import { getPage, getNameQuotes, getDialogQuotes } from '../../services/pagination';
 import { scrollToTop } from '../../services/ui';
-import { IQuoteName } from '../../types';
+import { IQuote } from '../../types';
 import './style.css';
 
 interface IQueryObj {
@@ -16,7 +16,7 @@ interface IQueryObj {
 }
 
 interface IQuotesProps {
-  setFavourites: React.Dispatch<React.SetStateAction<IQuoteName[]>>;
+  setFavourites: React.Dispatch<React.SetStateAction<IQuote[]>>;
 }
 
 const Quotes = ({ setFavourites }: IQuotesProps) => {

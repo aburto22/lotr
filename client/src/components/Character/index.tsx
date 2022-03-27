@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import CharacterContext from '../../context/CharacterContext';
+import { useAppSelector } from '../../hooks';
 import { fetchPostFromApi } from '../../services/api';
 import { scrollToTop } from '../../services/ui';
 
@@ -10,7 +10,7 @@ interface ImageFetch {
 }
 
 const Character = () => {
-  const characters = useContext(CharacterContext);
+  const characters = useAppSelector((state) => state.lotr.characters);
   const params = useParams();
   const [image, setImage] = useState('');
   const navigate = useNavigate();

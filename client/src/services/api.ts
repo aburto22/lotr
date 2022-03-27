@@ -1,6 +1,13 @@
+import { ICharacter, IQuote } from '../types';
+
 const host = process.env.NODE_ENV === 'development' ? 'http://localhost:5500' : '';
 
-export const fetchFromApi = async <T>(path: string): Promise<T> => {
+interface IFetchData {
+  characters: ICharacter[];
+  quotes: IQuote[];
+}
+
+export const fetchFromApi = async (path: string): Promise<IFetchData> => {
   const response = await fetch(`${host}/api/lotr${path}`);
   return response.json();
 };

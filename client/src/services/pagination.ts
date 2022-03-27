@@ -1,4 +1,4 @@
-import { ICharacter, IQuoteName } from '../types';
+import { ICharacter, IQuote } from '../types';
 
 export const getPage = <T>(array: T[], page: number = 1, limit: number = 10): T[] => {
   const init = (page - 1) * limit;
@@ -32,7 +32,7 @@ export const getRaceCharacter = (characters: ICharacter[], race: string) => {
   return characters.filter((c) => raceRgx.test(c.race));
 };
 
-export const getNameQuotes = (quotes: IQuoteName[], name: string): IQuoteName[] => {
+export const getNameQuotes = (quotes: IQuote[], name: string): IQuote[] => {
   if (!name) {
     return quotes;
   }
@@ -40,7 +40,7 @@ export const getNameQuotes = (quotes: IQuoteName[], name: string): IQuoteName[] 
   return quotes.filter((q) => nameRgx.test(q.characterName));
 };
 
-export const getDialogQuotes = (quotes: IQuoteName[], dialog: string): IQuoteName[] => {
+export const getDialogQuotes = (quotes: IQuote[], dialog: string): IQuote[] => {
   if (!dialog) {
     return quotes;
   }
