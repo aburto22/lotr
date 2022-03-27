@@ -1,26 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { toggleFavourite } from '../../slices';
 import { IQuote } from '../../types';
 import HearthIcon from '../HearthIcon';
 import './style.css';
 
 interface QuoteCardProps {
-  quote: IQuote
-  setFavourites: React.Dispatch<React.SetStateAction<IQuote[]>>;
+  quote: IQuote;
 }
 
-const QuoteCard = ({ quote, setFavourites }: QuoteCardProps) => {
+const QuoteCard = ({ quote }: QuoteCardProps) => {
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
-    setFavourites((favourites) => {
-      const index = favourites.findIndex((q) => q.id === quote.id);
-      if (index >= 0) {
-        return [
-          ...favourites.splice(0, index),
-          ...favourites.splice(index + 1),
-        ];
-      }
-      return [...favourites, quote];
-    });
+    dispatch(toggleFavourite(quote.id));
   };
 
   return (

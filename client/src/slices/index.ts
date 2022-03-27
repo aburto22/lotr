@@ -32,7 +32,7 @@ const lotrSlice = createSlice({
   reducers: {
     toggleFavourite: (state, action: PayloadAction<string>) => {
       const newQuotes = toggleQuoteById(state.quotes, action.payload);
-      const newFavourites = getFavourites(state.quotes);
+      const newFavourites = getFavourites(newQuotes);
 
       return {
         ...state,

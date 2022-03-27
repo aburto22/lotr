@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
+import { useAppSelector } from '../../hooks';
 import { scrollToTop } from '../../services/ui';
-import { IQuote } from '../../types';
 import QuoteCard from '../QuoteCard';
 import './style.css';
 
-interface IFavouritesProps {
-  favourites: IQuote[];
-  setFavourites: React.Dispatch<React.SetStateAction<IQuote[]>>;
-}
+const Favourites = () => {
+  const favourites = useAppSelector((state) => state.lotr.favourites);
 
-const Favourites = ({ favourites, setFavourites }: IFavouritesProps) => {
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -24,7 +21,6 @@ const Favourites = ({ favourites, setFavourites }: IFavouritesProps) => {
               <QuoteCard
                 key={q.id}
                 quote={q}
-                setFavourites={setFavourites}
               />
             ))
           : <h2 className="favourites-main__subtitle">Add favourites to see them here</h2>}
