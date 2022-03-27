@@ -6,6 +6,7 @@ import Pagination from '../Pagination';
 import DelayedInput from '../DelayedInput';
 import { getPage, getNameQuotes, getDialogQuotes } from '../../services/pagination';
 import { scrollToTop } from '../../services/ui';
+import { IQuoteName } from '../../types';
 import './style.css';
 
 interface IQueryObj {
@@ -14,7 +15,11 @@ interface IQueryObj {
   dialog?: string;
 }
 
-const Quotes = () => {
+interface IQuotesProps {
+  setFavourites: React.Dispatch<React.SetStateAction<IQuoteName[]>>;
+}
+
+const Quotes = ({ setFavourites }: IQuotesProps) => {
   const quotes = useContext(QuoteContext);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
@@ -65,9 +70,8 @@ const Quotes = () => {
             .map((q) => (
               <QuoteCard
                 key={q.id}
-                dialog={q.dialog}
-                characterName={q.characterName}
-                characterId={q.character}
+                quote={q}
+                setFavourites={setFavourites}
               />
             ))
           : <h2>No quotes found</h2>}

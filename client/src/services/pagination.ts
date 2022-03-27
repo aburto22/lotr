@@ -1,4 +1,4 @@
-import { ICharacter, IQuote, IQuoteName } from '../types';
+import { ICharacter, IQuoteName } from '../types';
 
 export const getPage = <T>(array: T[], page: number = 1, limit: number = 10): T[] => {
   const init = (page - 1) * limit;
@@ -46,12 +46,4 @@ export const getDialogQuotes = (quotes: IQuoteName[], dialog: string): IQuoteNam
   }
   const dialogRgx = new RegExp(dialog, 'i');
   return quotes.filter((q) => dialogRgx.test(q.dialog));
-};
-
-export const populateNamesQuotes = (quote: IQuote, characters: ICharacter[]): IQuoteName => {
-  const character = characters.find((c) => c.id === quote.character);
-  return {
-    ...quote,
-    characterName: character ? character.name : '',
-  };
 };

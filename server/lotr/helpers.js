@@ -3,6 +3,7 @@ const populateNamesQuotes = (quote, characters) => {
   return {
     ...quote,
     characterName: character ? character.name : '',
+    isFavourite: false,
   };
 };
 

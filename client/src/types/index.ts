@@ -32,4 +32,5 @@ export interface IQuoteName {
   character: string;
   id: string;
   characterName: string;
+  isFavourite: boolean;
 }

@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { scrollToTop } from '../../services/ui';
-import QuoteCard from '../QuoteCard';
 import { IQuoteName } from '../../types';
+import QuoteCard from '../QuoteCard';
 import './style.css';
 
-const Favourites = () => {
-  const [favourites] = useState<IQuoteName[]>(() => {
-    try {
-      const saved = localStorage.getItem('lotrQuotes') || '[]';
-      return JSON.parse(saved);
-    } catch (err) {
-      return [];
-    }
-  });
+interface IFavouritesProps {
+  favourites: IQuoteName[];
+  setFavourites: React.Dispatch<React.SetStateAction<IQuoteName[]>>;
+}
 
+const Favourites = ({ favourites, setFavourites }: IFavouritesProps) => {
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -27,12 +23,11 @@ const Favourites = () => {
             .map((q) => (
               <QuoteCard
                 key={q.id}
-                dialog={q.dialog}
-                characterName={q.characterName}
-                characterId={q.character}
+                quote={q}
+                setFavourites={setFavourites}
               />
             ))
-          : <h2>No favourites found</h2>}
+          : <h2 className="favourites-main__subtitle">Add favourites to see them here</h2>}
       </section>
     </main>
   );

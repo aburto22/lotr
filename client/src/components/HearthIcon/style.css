@@ -1,0 +1,15 @@
+.hearth-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.3rem;
+  fill: none;
+  color: white;
+}
+
+.hearth-icon--favourite {
+  fill: white;
+}
+
+.hearth-icon:hover {
+  fill: white;
+}

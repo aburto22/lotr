@@ -4,6 +4,9 @@
   max-width: 100%;
   width: max(40%, 20rem);
   transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .quote-card:hover {
@@ -28,4 +31,10 @@
   color: var(--lightblue);
   text-align: center;
   font-size: 0.7rem;
+}
+
+.quote-card__button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { fetchFromApi } from '../../services/api';
 import { ICharacter, IQuoteName } from '../../types';
+import { checkFavourite } from '../../services/favourites';
 import Header from '../Header';
 import Footer from '../Footer';
 import Home from '../Home';
@@ -23,6 +24,14 @@ const Site = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [quotes, setQuotes] = useState<IQuoteName[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [favourites, setFavourites] = useState<IQuoteName[]>(() => {
+    try {
+      const saved = localStorage.getItem('lotrQuotes') || '[]';
+      return JSON.parse(saved);
+    } catch (err) {
+      return [];
+    }
+  });
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 0);
@@ -31,8 +40,9 @@ const Site = () => {
   useEffect(() => {
     const fetchInfo = async (): Promise<void> => {
       const data = await fetchFromApi<FetchReturn>('/');
+      const quoteFavourites = data.quotes.map((q) => checkFavourite(q, favourites));
       setCharacters(data.characters);
-      setQuotes(data.quotes);
+      setQuotes(quoteFavourites);
     };
 
     fetchInfo();
@@ -49,8 +59,8 @@ const Site = () => {
               <Route path=":id" element={<Character />} />
               <Route index element={<Characters />} />
             </Route>
-            <Route path="quotes" element={<Quotes />} />
-            <Route path="favourites" element={<Favourites />} />
+            <Route path="quotes" element={<Quotes setFavourites={setFavourites} />} />
+            <Route path="favourites" element={<Favourites favourites={favourites} setFavourites={setFavourites} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
