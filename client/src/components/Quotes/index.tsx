@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import QuoteCard from '../QuoteCard';
-import QuoteContext from '../../context/QuoteContext';
+import { useAppSelector } from '../../hooks';
 import Pagination from '../Pagination';
 import DelayedInput from '../DelayedInput';
 import { getPage, getNameQuotes, getDialogQuotes } from '../../services/pagination';
@@ -20,7 +20,7 @@ interface IQuotesProps {
 }
 
 const Quotes = ({ setFavourites }: IQuotesProps) => {
-  const quotes = useContext(QuoteContext);
+  const quotes = useAppSelector((state) => state.lotr.quotes);
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState<number>(() => {
     if (query.get('page')) {
