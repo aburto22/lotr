@@ -1,9 +1,10 @@
 const { rest } = require('msw');
 const { setupServer } = require('msw/node');
 const supertest = require('supertest');
+const { populateNamesQuotes } = require('../lotr/helpers');
 const app = require('../app');
 
-const mockedData = {
+const mockedCharacters = {
   docs: [
     {
       _id: '5cd99d4bde30eff6ebccfbbe',
@@ -34,8 +35,28 @@ const mockedData = {
   ],
 };
 
+const mockedQuotes = {
+  docs: [
+    {
+      _id: '5cd96e05de30eff6ebcce7e9',
+      dialog: 'Deagol!',
+      movie: '5cd95395de30eff6ebccde5d',
+      character: '5cd99d4bde30eff6ebccfbbe',
+      id: '5cd96e05de30eff6ebcce7e9',
+    },
+    {
+      _id: '5cd96e05de30eff6ebcce7ec',
+      dialog: 'Give us that! Deagol my love',
+      movie: '5cd95395de30eff6ebccde5d',
+      character: '5cd99d4bde30eff6ebccfe9e',
+      id: '5cd96e05de30eff6ebcce7ec',
+    },
+  ],
+};
+
 const server = setupServer(
-  rest.get('https://the-one-api.dev/v2/character', (req, res, ctx) => res(ctx.json(mockedData))),
+  rest.get('https://the-one-api.dev/v2/character', (req, res, ctx) => res(ctx.json(mockedCharacters))),
+  rest.get('https://the-one-api.dev/v2/quote', (req, res, ctx) => res(ctx.json(mockedQuotes))),
 );
 
 describe('/api/lotr', () => {
@@ -44,13 +65,16 @@ describe('/api/lotr', () => {
   beforeEach(() => server.resetHandlers());
 
   test('GET /characters', () => {
-    const expected = mockedData.docs.map((character) => ({ ...character, id: character._id }));
+    const expectedCharacters = mockedCharacters.docs.map((c) => ({ ...c, id: c._id }));
+    const expectedQuotes = mockedQuotes.docs.map((q) => populateNamesQuotes(q, expectedCharacters));
+
     return supertest(app)
-      .get('/api/lotr/characters')
+      .get('/api/lotr/')
       .expect(200)
       .expect('Content-Type', /json/)
       .expect((res) => {
-        expect(res.body).toEqual(expected);
+        expect(res.body.characters).toEqual(expectedCharacters);
+        expect(res.body.quotes).toEqual(expectedQuotes);
       });
   });
 });
