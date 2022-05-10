@@ -1,4 +1,4 @@
-# travel buddy
+# LOTR Quotes
 > Simple app to find Lord of the Rings characters and famous quotes.
 > The app is hosted in heroku [_Click here to take a look._](https://quotes-lotr.herokuapp.com/)
 
